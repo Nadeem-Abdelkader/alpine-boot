@@ -16,11 +16,34 @@ import os
 from tkinter import Frame, Label, Entry, X, LEFT, RIGHT, YES, messagebox, Button, Tk, TOP
 
 # declaring the constants to be used everywhere in the module
-from read_txt_to_lst import read_txt_to_lst
-
 FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOPTS', 'PROXYOPTS',
           'APKREPOSOPTS', 'SSHDOPTS', 'NTPOPTS', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
 USERS_FILENAME = "data.txt"
+
+
+def read_txt_to_lst(filename):
+    mylines = []
+    # of = open(filename, 'rt')
+    # s = of.readlines()
+    # print(s)
+    with open(filename, 'rt') as myfile:
+        for myline in myfile:
+            # print(myline)
+            if myline.startswith("KEYMAPOPTS") or myline.startswith("HOSTNAMEOPTS") or myline.startswith(
+                    "INTERFACESOPTS") or \
+                    myline.startswith("DNSOPTS") or myline.startswith("TIMEZONEOPTS") or myline.startswith("PROXYOPTS") \
+                    or myline.startswith("APKREPOSOPTS") or myline.startswith("SSHDOPTS") or \
+                    myline.startswith("NTPOPTS") or myline.startswith("DISKOPTS") or \
+                    myline.startswith("LBUOPTS") or \
+                    myline.startswith("APKCACHEOPTS"):
+                start = myline.find("\"")
+                end = myline.rfind("\"")
+                # print(myline[start+1:end])
+                if myline[start + 1:end].startswith("-"):
+                    mylines.append(myline[start + 4:end])
+                else:
+                    mylines.append(myline[start + 1:end])
+    return mylines
 
 
 def make_form(root, fields):
