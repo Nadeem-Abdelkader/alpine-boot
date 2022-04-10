@@ -18,7 +18,7 @@ from tkinter import Frame, Label, Entry, X, LEFT, RIGHT, YES, messagebox, Button
 # declaring the constants to be used everywhere in the module
 FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOPTS', 'PROXYOPTS',
           'APKREPOSOPTS', 'SSHDOPTS', 'NTPOPTS', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
-USERS_FILENAME = "output.txt"
+USERS_FILENAME = "answers.txt"
 
 
 def read_txt_to_lst(filename):
