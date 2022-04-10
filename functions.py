@@ -79,6 +79,18 @@ def make_form(root, fields):
     return entries
 
 
+def read(ents):
+    """
+    This function re reads data from .txt file and re populates the entries
+    :param ents: entries to re populate
+    :return: void
+    """
+    data = read_txt_to_lst("answers.txt")
+    for i in range(len(FIELDS)):
+        ents[FIELDS[i]].delete(0, 'end')
+        ents[FIELDS[i]].insert(0, data[i])
+    return
+
 def makeLabel(root):
     """
     This function adds the GUI heading
@@ -276,9 +288,11 @@ def create_buttons():
     top = Frame(root)
     top.pack(side=TOP)
     submit_button = Button(root, text="Submit", command=(lambda e=ents: submit(e)))
+    read_button = Button(root, text="Read", command=(lambda e=ents: read(e)))
     clear_button = Button(root, text="Clear", command=(lambda e=ents: clear(e)))
     quit_button = Button(root, text="Quit", command=quit)
     submit_button.pack(in_=top, side=LEFT)
+    read_button.pack(in_=top, side=LEFT)
     clear_button.pack(in_=top, side=LEFT)
     quit_button.pack(in_=top, side=LEFT)
     return
