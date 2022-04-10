@@ -8,13 +8,7 @@ KEYMAPOPTS="us us"
 HOSTNAMEOPTS="-n myhost"
 
 # Contents of /etc/network/interfaces
-INTERFACESOPTS="auto lo
-iface lo inet loopback
-
-auto eth0
-iface eth0 inet dhcp
-    hostname myhost
-"
+INTERFACESOPTS="auto lo iface lo inet loopback auto eth0 iface eth0 inet dhcp hostname myhost"
 
 # Search domain of example.com, Google public nameserver
 DNSOPTS="-d example.com 8.8.8.8"
