@@ -1,9 +1,9 @@
 """
-ALPINE INSTALL SCREEN Application
-- Records all submitted user records as a an array of json objects in the file "users.json"
+ALPINE BOOT SCREEN Application
+- Reads user data from .txt file then allows user to edit and writes back updated data to .txt file
 
-Created by: Nadeem Abdelkader on 3/4/2022
-Last updated by Nadeem Abdelkader on 4/4/2022
+Created by: Nadeem Abdelkader on 9/4/2022
+Last updated by Nadeem Abdelkader on 10/4/2022
 
 GUI framework = Tkinter
 
@@ -18,10 +18,15 @@ from tkinter import Frame, Label, Entry, X, LEFT, RIGHT, YES, messagebox, Button
 # declaring the constants to be used everywhere in the module
 FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOPTS', 'PROXYOPTS',
           'APKREPOSOPTS', 'SSHDOPTS', 'NTPOPTS', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
-USERS_FILENAME = "data.txt"
+USERS_FILENAME = "output.txt"
 
 
 def read_txt_to_lst(filename):
+    """
+    This function reads the data from .txt file to a list
+    :param filename: txt file to read from
+    :return: list containing the data
+    """
     mylines = []
     # of = open(filename, 'rt')
     # s = of.readlines()
@@ -29,13 +34,13 @@ def read_txt_to_lst(filename):
     with open(filename, 'rt') as myfile:
         for myline in myfile:
             # print(myline)
-            if myline.startswith("KEYMAPOPTS") or myline.startswith("HOSTNAMEOPTS") or myline.startswith(
-                    "INTERFACESOPTS") or \
-                    myline.startswith("DNSOPTS") or myline.startswith("TIMEZONEOPTS") or myline.startswith("PROXYOPTS") \
-                    or myline.startswith("APKREPOSOPTS") or myline.startswith("SSHDOPTS") or \
-                    myline.startswith("NTPOPTS") or myline.startswith("DISKOPTS") or \
-                    myline.startswith("LBUOPTS") or \
-                    myline.startswith("APKCACHEOPTS"):
+            if myline.startswith(FIELDS[0]) or myline.startswith(FIELDS[1]) or myline.startswith(
+                    FIELDS[2]) or \
+                    myline.startswith(FIELDS[3]) or myline.startswith(FIELDS[4]) or myline.startswith(FIELDS[5]) \
+                    or myline.startswith(FIELDS[6]) or myline.startswith(FIELDS[7]) or \
+                    myline.startswith(FIELDS[8]) or myline.startswith(FIELDS[9]) or \
+                    myline.startswith(FIELDS[10]) or \
+                    myline.startswith(FIELDS[11]):
                 start = myline.find("\"")
                 end = myline.rfind("\"")
                 # print(myline[start+1:end])
