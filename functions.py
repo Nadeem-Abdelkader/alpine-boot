@@ -126,12 +126,12 @@ def submit(entries):
         # with open(filename,
         #           "w") as write_file:  # change "w" to "a" if you want to append instead of overwrite
         #     json.dump(dict, write_file, indent=4)
-        comments = ["# Example answer file for setup-alpine script \n"
+        comments = ["# Example answer file for setup-alpine script\n"
                     "# If you don't want to use a certain option, then comment it out\n\n"
                     "# Use US layout with US variant\n",
                     "\n# Set hostname to alpine-test\n",
                     "\n# Contents of /etc/network/interfaces\n",
-                    "\n# Search domain of example.com, Google public nameserver\n"
+                    "\n# Search domain of example.com, Google public nameserver\n",
                     "\n# Set timezone to UTC\n",
                     "\n# set http/ftp proxy\n",
                     "\n# Add a random mirror\n",
@@ -144,8 +144,24 @@ def submit(entries):
             for i in range(len(FIELDS)):
                 if i < len(comments):
                     file.write(comments[i])
-                file.write(FIELDS[i] + "=\"" + dict[FIELDS[i]] + "\"")
+                if i == 1:
+                    file.write(FIELDS[i] + "=\"-n " + dict[FIELDS[i]] + "\"")
+                elif i == 3:
+                    file.write(FIELDS[i] + "=\"-d " + dict[FIELDS[i]] + "\"")
+                elif i == 4:
+                    file.write(FIELDS[i] + "=\"-z " + dict[FIELDS[i]] + "\"")
+                elif i == 6:
+                    file.write(FIELDS[i] + "=\"-r" + dict[FIELDS[i]] + "\"")
+                elif i == 7:
+                    file.write(FIELDS[i] + "=\"-c " + dict[FIELDS[i]] + "\"")
+                elif i == 8:
+                    file.write(FIELDS[i] + "=\"-c " + dict[FIELDS[i]] + "\"")
+                elif i == 9:
+                    file.write(FIELDS[i] + "=\"-m " + dict[FIELDS[i]] + "\"")
+                else:
+                    file.write(FIELDS[i] + "=\"" + dict[FIELDS[i]] + "\"")
                 file.write("\n")
+            file.write("\n")
         # jsonString = json.dumps(users_list, indent=4)
         # jsonFile = open(USERS_FILENAME, "w")
         # jsonFile.write(jsonString)
