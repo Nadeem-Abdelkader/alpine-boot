@@ -1,9 +1,9 @@
 """
-ALPINE INSTALL SCREEN Application
-- Records all submitted user records as a an array of json objects in the file "users.json"
+ALPINE BOOT SCREEN Application
+- Reads user data from .txt file then allows user to edit and writes back updated data to .txt file
 
-Created by: Nadeem Abdelkader on 3/4/2022
-Last updated by Nadeem Abdelkader on 4/4/2022
+Created by: Nadeem Abdelkader on 9/4/2022
+Last updated by Nadeem Abdelkader on 10/4/2022
 
 GUI framework = Tkinter
 """
