@@ -196,11 +196,13 @@ def submit(entries):
         dict = {}
         for i in range(len(entries)):
             dict[FIELDS[i]] = entries[FIELDS[i]].get()
+        print(dict)
+
         #
         # users_list = []
         # if os.path.exists(USERS_FILENAME) and os.stat(USERS_FILENAME).st_size != 0:
         #     users_list = read_from_json(USERS_FILENAME)
-        #     users_list.append(dict)
+        #     users_lisxt.append(dict)
         # else:
         #     users_list.append(dict)
 
