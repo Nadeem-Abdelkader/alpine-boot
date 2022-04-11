@@ -22,7 +22,38 @@ FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOP
 DISPlAY_FIELDS = ('Keyboard Layout', 'Host Name', 'Network Interface', 'DNS and Domain', 'Timezone', 'Proxy',
                   'Repository', 'SSH Server', 'NTP Service', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
 
-USERS_FILENAME = "output.txt"
+USERS_FILENAME = "answers.txt"
+
+data_dict = {
+    FIELDS[0]: None,
+    FIELDS[1]: None,
+    FIELDS[2]: None,
+    FIELDS[3]: None,
+    FIELDS[4]: None,
+    FIELDS[5]: None,
+    FIELDS[6]: None,
+    FIELDS[7]: None,
+    FIELDS[8]: None,
+    FIELDS[9]: None,
+    FIELDS[10]: None,
+    FIELDS[11]: None,
+}
+
+
+def read_to_dict(filename):
+    """
+    This function reads data from a txt file to a dictionary
+    :param filename: file to read from
+    :return: dictionary contining read data
+    """
+    f = open(filename, 'r')
+    f = f.read()
+    f = f.split('\"')
+    for i in range(len(f)):
+        for j in range(len(FIELDS)):
+            if f[i].endswith(FIELDS[j] + "="):
+                data_dict[FIELDS[j]] = f[i + 1]
+    return data_dict
 
 
 def read_txt_to_lst(filename):
@@ -66,6 +97,7 @@ def make_form(root, fields):
     entries = {}
     i = 0
     data = read_txt_to_lst("answers.txt")
+    data = read_to_dict("answers.txt")
     for field in fields:
         row = Frame(root)
         lab = Label(row, width=22, text=DISPlAY_FIELDS[i] + ": ", anchor='w')
@@ -73,7 +105,11 @@ def make_form(root, fields):
             ent = Entry(row, show="*")
         else:
             ent = Entry(row)
-            ent.insert(0, data[i])
+            if data[field].startswith("-"):
+                # print(data[field][3:])
+                ent.insert(0, data[field][3:])
+            else:
+                ent.insert(0, data[field])
         ent.insert(0, "")
         row.pack(side=TOP, fill=X, padx=25, pady=5)
         lab.pack(side=LEFT)
@@ -90,9 +126,13 @@ def read(ents):
     :return: void
     """
     data = read_txt_to_lst("answers.txt")
+    data = read_to_dict("answers.txt")
     for i in range(len(FIELDS)):
         ents[FIELDS[i]].delete(0, 'end')
-        ents[FIELDS[i]].insert(0, data[i])
+        if data[FIELDS[i]].startswith("-"):
+            ents[FIELDS[i]].insert(0, data[FIELDS[i]][3:])
+        else:
+            ents[FIELDS[i]].insert(0, data[FIELDS[i]])
     txt_result.config(text="Successfully read data!", fg="green")
     return
 
