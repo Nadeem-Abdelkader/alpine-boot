@@ -18,7 +18,11 @@ from tkinter import Frame, Label, Entry, X, LEFT, RIGHT, YES, messagebox, Button
 # declaring the constants to be used everywhere in the module
 FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOPTS', 'PROXYOPTS',
           'APKREPOSOPTS', 'SSHDOPTS', 'NTPOPTS', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
-USERS_FILENAME = "answers.txt"
+
+DISPlAY_FIELDS = ('Keyboard Layout', 'Host Name', 'Network Interface', 'DNS and Domain', 'Timezone', 'Proxy',
+                  'Repository', 'SSH Server', 'NTP Service', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
+
+USERS_FILENAME = "output.txt"
 
 
 def read_txt_to_lst(filename):
@@ -64,7 +68,7 @@ def make_form(root, fields):
     data = read_txt_to_lst("answers.txt")
     for field in fields:
         row = Frame(root)
-        lab = Label(row, width=22, text=field + ": ", anchor='w')
+        lab = Label(row, width=22, text=DISPlAY_FIELDS[i] + ": ", anchor='w')
         if field == "Password" or field == "Re-enter Password":
             ent = Entry(row, show="*")
         else:
@@ -89,7 +93,9 @@ def read(ents):
     for i in range(len(FIELDS)):
         ents[FIELDS[i]].delete(0, 'end')
         ents[FIELDS[i]].insert(0, data[i])
+    txt_result.config(text="Successfully read data!", fg="green")
     return
+
 
 def makeLabel(root):
     """
