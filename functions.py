@@ -196,7 +196,7 @@ def submit(entries):
         dict = {}
         for i in range(len(entries)):
             dict[FIELDS[i]] = entries[FIELDS[i]].get()
-        print(dict)
+        # print(dict)
 
         #
         # users_list = []
