@@ -22,7 +22,9 @@ FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOP
 DISPlAY_FIELDS = ('Keyboard Layout', 'Host Name', 'Network Interface', 'DNS and Domain', 'Timezone', 'Proxy',
                   'Repository', 'SSH Server', 'NTP Service', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
 
-USERS_FILENAME = "answers.txt"
+os.getcwd()
+ANSWERS_FILENAME = os.getcwd() + "/tmp/answers.txt"
+# print(ANSWERS_FILENAME)
 
 data_dict = {
     FIELDS[0]: None,
@@ -96,8 +98,8 @@ def make_form(root, fields):
     makeLabel(root)
     entries = {}
     i = 0
-    data = read_txt_to_lst("answers.txt")
-    data = read_to_dict("answers.txt")
+    data = read_txt_to_lst(ANSWERS_FILENAME)
+    data = read_to_dict(ANSWERS_FILENAME)
     for field in fields:
         row = Frame(root)
         lab = Label(row, width=22, text=DISPlAY_FIELDS[i] + ": ", anchor='w')
@@ -125,8 +127,8 @@ def read(ents):
     :param ents: entries to re populate
     :return: void
     """
-    data = read_txt_to_lst("answers.txt")
-    data = read_to_dict("answers.txt")
+    data = read_txt_to_lst(ANSWERS_FILENAME)
+    data = read_to_dict(ANSWERS_FILENAME)
     for i in range(len(FIELDS)):
         ents[FIELDS[i]].delete(0, 'end')
         if data[FIELDS[i]].startswith("-"):
@@ -210,7 +212,7 @@ def submit(entries):
 
         filename = str(entries[FIELDS[0]].get()).replace(" ", "") + ".json"
         filename = "/Users/nadeem/Documents/Khwarizm/Alpine/alpine-install/records/" + filename
-        filename = USERS_FILENAME
+        filename = ANSWERS_FILENAME
         # with open(filename,
         #           "w") as write_file:  # change "w" to "a" if you want to append instead of overwrite
         #     json.dump(dict, write_file, indent=4)
