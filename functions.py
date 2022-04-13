@@ -11,7 +11,7 @@ This file contains the helper function to be called from main.py
 """
 
 # importing the necessary libraries for working with json
-import json
+# import json
 import os
 from tkinter import Frame, Label, Entry, X, LEFT, RIGHT, YES, messagebox, Button, Tk, TOP
 
@@ -25,6 +25,9 @@ DISPlAY_FIELDS = ('Keyboard Layout', 'Host Name', 'Network Interface', 'DNS and 
 os.getcwd()
 ANSWERS_FILENAME = os.getcwd() + "/tmp/answers.txt"
 # print(ANSWERS_FILENAME)
+
+global txt_result
+global my_ents
 
 data_dict = {
     FIELDS[0]: None,
@@ -95,10 +98,10 @@ def make_form(root, fields):
     :param fields: array of strings that include the field names to createb the form according to
     :return: an array of Tkinter entries
     """
-    makeLabel(root)
+    make_label(root)
     entries = {}
     i = 0
-    data = read_txt_to_lst(ANSWERS_FILENAME)
+    # data = read_txt_to_lst(ANSWERS_FILENAME)
     data = read_to_dict(ANSWERS_FILENAME)
     for field in fields:
         row = Frame(root)
@@ -127,7 +130,7 @@ def read(ents):
     :param ents: entries to re populate
     :return: void
     """
-    data = read_txt_to_lst(ANSWERS_FILENAME)
+    # data = read_txt_to_lst(ANSWERS_FILENAME)
     data = read_to_dict(ANSWERS_FILENAME)
     for i in range(len(FIELDS)):
         ents[FIELDS[i]].delete(0, 'end')
@@ -139,7 +142,7 @@ def read(ents):
     return
 
 
-def makeLabel(root):
+def make_label(root):
     """
     This function adds the GUI heading
     :param root: root Tkinter window
@@ -195,9 +198,9 @@ def submit(entries):
     #     txt_result.config(text="Passwords do not match!", fg="red")
 
     if cont:
-        dict = {}
+        my_dict = {}
         for i in range(len(entries)):
-            dict[FIELDS[i]] = entries[FIELDS[i]].get()
+            my_dict[FIELDS[i]] = entries[FIELDS[i]].get()
         # print(dict)
 
         #
@@ -210,8 +213,8 @@ def submit(entries):
 
         # print(dict)
 
-        filename = str(entries[FIELDS[0]].get()).replace(" ", "") + ".json"
-        filename = "/Users/nadeem/Documents/Khwarizm/Alpine/alpine-install/records/" + filename
+        # filename = str(entries[FIELDS[0]].get()).replace(" ", "") + ".json"
+        # filename = "/Users/nadeem/Documents/Khwarizm/Alpine/alpine-install/records/" + filename
         filename = ANSWERS_FILENAME
         # with open(filename,
         #           "w") as write_file:  # change "w" to "a" if you want to append instead of overwrite
@@ -235,21 +238,21 @@ def submit(entries):
                 if i < len(comments):
                     file.write(comments[i])
                 if i == 1:
-                    file.write(FIELDS[i] + "=\"-n " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-n " + my_dict[FIELDS[i]] + "\"")
                 elif i == 3:
-                    file.write(FIELDS[i] + "=\"-d " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-d " + my_dict[FIELDS[i]] + "\"")
                 elif i == 4:
-                    file.write(FIELDS[i] + "=\"-z " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-z " + my_dict[FIELDS[i]] + "\"")
                 elif i == 6:
-                    file.write(FIELDS[i] + "=\"-r" + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-r" + my_dict[FIELDS[i]] + "\"")
                 elif i == 7:
-                    file.write(FIELDS[i] + "=\"-c " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-c " + my_dict[FIELDS[i]] + "\"")
                 elif i == 8:
-                    file.write(FIELDS[i] + "=\"-c " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-c " + my_dict[FIELDS[i]] + "\"")
                 elif i == 9:
-                    file.write(FIELDS[i] + "=\"-m " + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"-m " + my_dict[FIELDS[i]] + "\"")
                 else:
-                    file.write(FIELDS[i] + "=\"" + dict[FIELDS[i]] + "\"")
+                    file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
                 file.write("\n")
             file.write("\n")
         # jsonString = json.dumps(users_list, indent=4)
@@ -296,6 +299,7 @@ def clear(entries, on_submit=False):
     This function is executed when the users clicks the "clear" button.
     It resets the entire form
     :param entries: an array of entries to clear
+    :param on_submit: indicates whether on submit or not to in order to display correct message
     :return: void
     """
     for i in range(len(FIELDS)):
@@ -305,7 +309,7 @@ def clear(entries, on_submit=False):
     return
 
 
-def quit():
+def quit_app():
     """
     This function is executed when the users clicks the "quit" button.
     It quits the entire application
@@ -314,7 +318,7 @@ def quit():
     result = messagebox.askquestion(
         'Khwarizm Consulting', 'Are you sure you want to exit?', icon="warning")
     if result == 'yes':
-        root.destroy()
+        my_root.destroy()
     return
 
 
@@ -325,7 +329,7 @@ def text_alert():
     :return: void
     """
     global txt_result
-    txt_result = Label(root)
+    txt_result = Label(my_root)
     txt_result.pack()
     return
 
@@ -335,12 +339,12 @@ def create_buttons():
     This function creates 3 buttons (submit, clear, and quit) and associates them with the appropriate methods
     :return: void
     """
-    top = Frame(root)
+    top = Frame(my_root)
     top.pack(side=TOP)
-    submit_button = Button(root, text="Submit", command=(lambda e=ents: submit(e)))
-    read_button = Button(root, text="Read", command=(lambda e=ents: read(e)))
-    clear_button = Button(root, text="Clear", command=(lambda e=ents: clear(e)))
-    quit_button = Button(root, text="Quit", command=quit)
+    submit_button = Button(my_root, text="Submit", command=lambda: submit(my_ents))
+    read_button = Button(my_root, text="Read", command=lambda: read(my_ents))
+    clear_button = Button(my_root, text="Clear", command=lambda: clear(my_ents))
+    quit_button = Button(my_root, text="Quit", command=quit_app)
     submit_button.pack(in_=top, side=LEFT)
     read_button.pack(in_=top, side=LEFT)
     clear_button.pack(in_=top, side=LEFT)
@@ -353,14 +357,14 @@ def initialise_window():
     This function initialises the Tkinter GUI window
     :return: root Tkinter window
     """
-    global root, ents
-    root = Tk()
-    ents = make_form(root, FIELDS)
-    root.geometry("800x600")
-    root.title("Khwarizm Consulting")
-    root.bind('<Return>', (lambda event, e=ents: fetch(e)))
-    return root
+    global my_root, my_ents
+    my_root = Tk()
+    my_ents = make_form(my_root, FIELDS)
+    my_root.geometry("800x600")
+    my_root.title("Khwarizm Consulting")
+    # root.bind('<Return>', (lambda event, e=ents: fetch(e)))
+    return my_root
 
 
 # calling function to initialise the GUI window
-root = initialise_window()
+my_root = initialise_window()
