@@ -13,35 +13,6 @@ GUI framework = Tkinter
 # importing the helper functions from functions.py
 from functions import text_alert, create_buttons, my_root
 
-"""
-On Startup
-
-Enable and run dbus for GUI
-
-# rc-service dbus start
-# rc-update add dbus
-
-Disable lxdm - replace with our script
-
-# rc-service lxdm stop
-# rc-update remove lxdm
-
-import os
-
-cmd = 'rc-service dbus start'
-os.system(cmd)
-
-cmd = 'rc-update add dbus'
-os.system(cmd)
-
-cmd = 'rc-service lxdm stop'
-os.system(cmd)
-
-cmd = 'rc-update remove lxdm'
-os.system(cmd)
-
-"""
-
 if __name__ == '__main__':
     """
     Calling the helper functions from functions.py to start and run the application
