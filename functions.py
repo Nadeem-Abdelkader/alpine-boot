@@ -94,7 +94,7 @@ def make_form(root, fields):
     :param fields: array of strings that include the field names to createb the form according to
     :return: an array of Tkinter entries
     """
-    # make_label(root)
+    make_label(root)
     entries = {}
     i = 0
     data = read_to_dict(ANSWERS_FILE)
@@ -142,7 +142,7 @@ def make_label(root):
     :return: void
     """
     txt_title = Label(root, width=0, font=(
-        'arial', 24), text="Alpine Installation")
+        'arial', 1), text="")
     txt_title.pack(side=TOP, padx=5, pady=5)
     return
 
@@ -272,7 +272,7 @@ def initialise_window():
     global my_root, my_ents
     my_root = Tk()
     my_ents = make_form(my_root, FIELDS)
-    my_root.geometry("800x525")
+    my_root.geometry("800x550")
     my_root.title("Alpine Installation")
     return my_root
 
