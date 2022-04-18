@@ -278,6 +278,8 @@ def initialise_window():
     global my_root, my_ents
     my_root = Tk()
     my_ents = make_form(my_root, FIELDS)
+    # 800x465 - Alpine
+    # 800x550 - Others
     my_root.geometry("800x550")
     my_root.title("Installation")
     return my_root
