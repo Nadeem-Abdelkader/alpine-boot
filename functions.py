@@ -20,7 +20,7 @@ FIELDS = ('KEYMAPOPTS', 'HOSTNAMEOPTS', 'INTERFACESOPTS', 'DNSOPTS', 'TIMEZONEOP
 DISPlAY_FIELDS = ('Keyboard Layout', 'Host Name', 'Network Interface', 'DNS and Domain', 'Timezone', 'Proxy',
                   'Repository', 'SSH Server', 'NTP Service', 'DISKOPTS', 'LBUOPTS', 'APKCACHEOPTS')
 
-BASE_DIR = "/usr/local/KC"
+BASE_DIR = "/usr/local/KC/"
 
 # For development
 OS_BASE_DIR = BASE_DIR
@@ -28,10 +28,10 @@ OS_BASE_DIR = BASE_DIR
 # For production
 # OS_BASE_DIR = "/"
 
-ANSWERS_FILE = OS_BASE_DIR + "/config/answers.txt"
-HOST_FILE = OS_BASE_DIR + "/etc/hostname.txt"
-INTERFACES_FILE = OS_BASE_DIR + "/etc/network/interfaces.txt"
-RESOLVE_FILE = OS_BASE_DIR + "/etc/resolve.conf"
+ANSWERS_FILE = OS_BASE_DIR + "config/answers.txt"
+HOST_FILE = OS_BASE_DIR + "etc/hostname.txt"
+INTERFACES_FILE = OS_BASE_DIR + "etc/network/interfaces.txt"
+RESOLVE_FILE = OS_BASE_DIR + "etc/resolve.conf"
 
 global txt_result
 global my_ents
