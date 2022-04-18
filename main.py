@@ -1,5 +1,5 @@
 """
-ALPINE BOOT SCREEN Application
+BOOT Application
 - Reads user data from .txt file then allows user to edit and writes back updated data to .txt file
 
 Created by: Nadeem Abdelkader on 9/4/2022

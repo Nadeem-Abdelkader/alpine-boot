@@ -1,5 +1,5 @@
 """
-ALPINE BOOT SCREEN Application
+BOOT Application
 - Reads user data from .txt file then allows user to edit and writes back updated data to .txt file
 
 Created by: Nadeem Abdelkader on 9/4/2022
@@ -234,7 +234,7 @@ def quit_app():
     :return: void
     """
     result = messagebox.askquestion(
-        'Alpine Installation', 'Are you sure you want to exit?', icon="warning")
+        'Installation', 'Are you sure you want to exit?', icon="warning")
     if result == 'yes':
         my_root.destroy()
     return
@@ -279,7 +279,7 @@ def initialise_window():
     my_root = Tk()
     my_ents = make_form(my_root, FIELDS)
     my_root.geometry("800x550")
-    my_root.title("Alpine Installation")
+    my_root.title("Installation")
     return my_root
 
 

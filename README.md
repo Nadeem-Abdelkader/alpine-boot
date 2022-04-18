@@ -1,4 +1,4 @@
-# Alpine Boot Application
+# Boot Application
 
 ## Author
 - [Nadeem Abdelkader](https://github.com/Nadeem-Abdelkader)
@@ -10,13 +10,13 @@ A Python Tkinter form that reads data from a txt file and allows user to edit th
 
 1. Download and install Python 3.10 from <https://www.python.org/downloads/> and make sure to add Python to PATH if you are using Windows
 2. Clone or download the git repository
-   [here](https://github.com/Nadeem-Abdelkader/alpine-boot).
+   [here](https://github.com/Nadeem-Abdelkader/boot-application).
     ```sh
-    git clone https://github.com/Nadeem-Abdelkader/alpine-boot
+    git clone https://github.com/Nadeem-Abdelkader/boot-application
     ```
 3. Navigate to the cloned local repository
     ```sh
-    cd alpine-boot
+    cd boot-application
     ```
 
 4. To start the application, run the following command while inside the cloned local repository:
