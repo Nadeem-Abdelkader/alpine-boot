@@ -280,7 +280,7 @@ def initialise_window():
     my_ents = make_form(my_root, FIELDS)
     # 800x465 - Alpine
     # 800x550 - Others
-    my_root.geometry("800x550")
+    my_root.geometry("800x465")
     my_root.title("Installation")
     return my_root
 
