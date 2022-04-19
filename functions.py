@@ -166,7 +166,7 @@ def submit(entries):
         my_dict = {}
         for i in range(len(entries)):
             my_dict[FIELDS[i]] = entries[FIELDS[i]].get()
-
+        data = read_to_dict(ANSWERS_FILE)
         filename = ANSWERS_FILE
         comments = ["# Example answer file for setup-alpine script\n"
                     "# If you don't want to use a certain option, then comment it out\n\n"
@@ -186,22 +186,16 @@ def submit(entries):
             for i in range(len(FIELDS)):
                 if i < len(comments):
                     file.write(comments[i])
-                if i == 1:
-                    file.write(FIELDS[i] + "=\"-n " + my_dict[FIELDS[i]] + "\"")
-                elif i == 3:
-                    file.write(FIELDS[i] + "=\"-d " + my_dict[FIELDS[i]] + "\"")
-                elif i == 4:
-                    file.write(FIELDS[i] + "=\"-z " + my_dict[FIELDS[i]] + "\"")
-                elif i == 6:
-                    file.write(FIELDS[i] + "=\"-r" + my_dict[FIELDS[i]] + "\"")
-                elif i == 7:
-                    file.write(FIELDS[i] + "=\"-c " + my_dict[FIELDS[i]] + "\"")
-                elif i == 8:
-                    file.write(FIELDS[i] + "=\"-c " + my_dict[FIELDS[i]] + "\"")
-                elif i == 9:
-                    file.write(FIELDS[i] + "=\"-m " + my_dict[FIELDS[i]] + "\"")
+                if my_dict[FIELDS[i]] == "":
+                    if data[FIELDS[i]].startswith("-"):
+                        file.write(FIELDS[i] + "=\"" + data[FIELDS[i]][:2] + "" + my_dict[FIELDS[i]] + "\"")
+                    else:
+                        file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
                 else:
-                    file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
+                    if data[FIELDS[i]].startswith("-"):
+                        file.write(FIELDS[i] + "=\""+data[FIELDS[i]][:2]+" " + my_dict[FIELDS[i]] + "\"")
+                    else:
+                        file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
                 file.write("\n")
             file.write("\n")
 
