@@ -161,57 +161,57 @@ def submit(entries):
     :return: void
     """
     # Uncomment this if you want to make all fields except 'APKREPOSOPTS' required
-    # empty_field = False
-    # for i in entries:
-    #     # Remove this if condition if you want to make all fields required
-    #     if i not in ['APKREPOSOPTS']:
-    #         if entries[i].get() == "" or entries[i].get() == []:
-    #             empty_field = True
-    # if empty_field:
-    #     txt_result.config(text="Please complete the required field!", fg="red")
-    # else:
-    cont = True
+    empty_field = False
+    for i in entries:
+        # Remove this if condition if you want to make all fields required
+        if i not in ['APKREPOSOPTS']:
+            if entries[i].get() == "" or entries[i].get() == []:
+                empty_field = True
+    if empty_field:
+        txt_result.config(text="Please complete the required field!", fg="red")
+    else:
+        cont = True
 
-    if cont:
-        my_dict = {}
-        for i in range(len(entries)):
-            my_dict[FIELDS[i]] = entries[FIELDS[i]].get()
-        data = read_to_dict(ANSWERS_FILE)
-        filename = ANSWERS_FILE
-        comments = ["# Example answer file for setup-alpine script\n"
-                    "# If you don't want to use a certain option, then comment it out\n\n"
-                    "# Use US layout with US variant\n",
-                    "\n# Set hostname to alpine-test\n",
-                    "\n# Contents of /etc/network/interfaces\n",
-                    "\n# Search domain of example.com, Google public nameserver\n",
-                    "\n# Set timezone to UTC\n",
-                    "\n# set http/ftp proxy\n",
-                    "\n# Add a random mirror\n",
-                    "\n# Install Openssh\n",
-                    "\n# Use openntpd\n",
-                    "\n# Use /dev/sda as a data disk\n",
-                    "\n# Setup in /media/sdb1\n"
-                    ]
-        with open(filename, 'w') as file:
-            for i in range(len(FIELDS)):
-                if i < len(comments):
-                    file.write(comments[i])
-                if my_dict[FIELDS[i]] == "":
-                    if data[FIELDS[i]].startswith("-"):
-                        file.write(FIELDS[i] + "=\"" + data[FIELDS[i]][:2] + "" + my_dict[FIELDS[i]] + "\"")
+        if cont:
+            my_dict = {}
+            for i in range(len(entries)):
+                my_dict[FIELDS[i]] = entries[FIELDS[i]].get()
+            data = read_to_dict(ANSWERS_FILE)
+            filename = ANSWERS_FILE
+            comments = ["# Example answer file for setup-alpine script\n"
+                        "# If you don't want to use a certain option, then comment it out\n\n"
+                        "# Use US layout with US variant\n",
+                        "\n# Set hostname to alpine-test\n",
+                        "\n# Contents of /etc/network/interfaces\n",
+                        "\n# Search domain of example.com, Google public nameserver\n",
+                        "\n# Set timezone to UTC\n",
+                        "\n# set http/ftp proxy\n",
+                        "\n# Add a random mirror\n",
+                        "\n# Install Openssh\n",
+                        "\n# Use openntpd\n",
+                        "\n# Use /dev/sda as a data disk\n",
+                        "\n# Setup in /media/sdb1\n"
+                        ]
+            with open(filename, 'w') as file:
+                for i in range(len(FIELDS)):
+                    if i < len(comments):
+                        file.write(comments[i])
+                    if my_dict[FIELDS[i]] == "":
+                        if data[FIELDS[i]].startswith("-"):
+                            file.write(FIELDS[i] + "=\"" + data[FIELDS[i]][:2] + "" + my_dict[FIELDS[i]] + "\"")
+                        else:
+                            file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
                     else:
-                        file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
-                else:
-                    if data[FIELDS[i]].startswith("-"):
-                        file.write(FIELDS[i] + "=\""+data[FIELDS[i]][:2]+" " + my_dict[FIELDS[i]] + "\"")
-                    else:
-                        file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
+                        if data[FIELDS[i]].startswith("-"):
+                            file.write(FIELDS[i] + "=\""+data[FIELDS[i]][:2]+" " + my_dict[FIELDS[i]] + "\"")
+                        else:
+                            file.write(FIELDS[i] + "=\"" + my_dict[FIELDS[i]] + "\"")
+                    file.write("\n")
                 file.write("\n")
-            file.write("\n")
 
-        txt_result.config(text="Successfully submitted data!", fg="green")
+            txt_result.config(text="Successfully submitted data!", fg="green")
 
-        clear(entries, True)
+            clear(entries, True)
 
     return
 
