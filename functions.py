@@ -26,7 +26,7 @@ BASE_DIR = "/usr/local/KC/"
 OS_BASE_DIR = BASE_DIR
 
 # For production
-# OS_BASE_DIR = "/"
+OS_BASE_DIR = "/"
 
 ANSWERS_FILE = OS_BASE_DIR + "config/answers.txt"
 HOST_FILE = OS_BASE_DIR + "etc/hostname.txt"
